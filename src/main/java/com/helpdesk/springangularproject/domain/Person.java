@@ -1,21 +1,46 @@
 package com.helpdesk.springangularproject.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.helpdesk.springangularproject.domain.enums.Profile;
+import org.hibernate.validator.constraints.br.CPF;
 
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public abstract class Person {
+@Entity
+public abstract class Person implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = -4149928755988803264L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
+
     protected String name;
+
+    @Column(unique = true)
+    @CPF
     protected String cpf;
+
+    @Column(unique = true)
+    @Email
     protected String email;
+
     protected String password;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "PROFILES")
     protected Set<Integer> profiles = new HashSet<>();
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate creationDate = LocalDate.now();
 
     public Person() {

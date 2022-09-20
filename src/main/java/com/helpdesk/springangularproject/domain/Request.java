@@ -1,22 +1,45 @@
 package com.helpdesk.springangularproject.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.helpdesk.springangularproject.domain.enums.Priority;
 import com.helpdesk.springangularproject.domain.enums.Status;
 
+import javax.persistence.*;
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Request {
+@Entity
+public class Request implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 171216050681921927L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate openingDate = LocalDate.now();
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate closingDate;
+
     private Priority prioridade;
+
     private Status status;
+
     private String title;
+
     private String notes;
 
+    @ManyToOne
+    @JoinColumn(name = "technician_id")
     private Technician technician;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
     private Client client;
 
     public Request() {
