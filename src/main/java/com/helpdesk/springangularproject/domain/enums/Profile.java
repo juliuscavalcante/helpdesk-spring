@@ -1,12 +1,6 @@
 package com.helpdesk.springangularproject.domain.enums;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 
-@AllArgsConstructor
-@Getter
-@Setter
 public enum Profile {
 
     ADMIN(0, "ROLE_ADMIN"),
@@ -15,6 +9,20 @@ public enum Profile {
 
     private Integer code;
     private String description;
+
+
+    Profile(Integer code, String description) {
+        this.code = code;
+        this.description = description;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 
 
     public static Profile toEnum(Integer code) {
@@ -29,5 +37,4 @@ public enum Profile {
         }
         throw new IllegalArgumentException("Invalid profile");
     }
-
 }

@@ -1,12 +1,6 @@
 package com.helpdesk.springangularproject.domain.enums;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 
-@AllArgsConstructor
-@Getter
-@Setter
 public enum Priority {
 
     LOW(0, "LOW_PRIORITY"),
@@ -16,6 +10,19 @@ public enum Priority {
     private Integer code;
     private String description;
 
+
+    Priority(Integer code, String description) {
+        this.code = code;
+        this.description = description;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 
     public static Priority toEnum(Integer code) {
         if (code == null) {
@@ -29,5 +36,4 @@ public enum Priority {
         }
         throw new IllegalArgumentException("Invalid priority");
     }
-
 }

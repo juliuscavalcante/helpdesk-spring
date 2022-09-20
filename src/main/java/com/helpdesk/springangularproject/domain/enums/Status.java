@@ -1,12 +1,7 @@
 package com.helpdesk.springangularproject.domain.enums;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 
-@AllArgsConstructor
-@Getter
-@Setter
+
 public enum Status {
 
     OPEN(0, "OPEN"),
@@ -16,6 +11,18 @@ public enum Status {
     private Integer code;
     private String description;
 
+    Status(Integer code, String description) {
+        this.code = code;
+        this.description = description;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 
     public static Status toEnum(Integer code) {
         if (code == null) {
