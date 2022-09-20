@@ -22,7 +22,7 @@ public class Technician extends Person {
         addProfile(Profile.TECHNICIAN);
     }
 
-    public Technician(Integer id, String name, String cpf, String email, String password) {
+    public Technician(Long id, String name, String cpf, String email, String password) {
         super(id, name, cpf, email, password);
         addProfile(Profile.TECHNICIAN);
     }

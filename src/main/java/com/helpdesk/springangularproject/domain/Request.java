@@ -18,7 +18,7 @@ public class Request implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate openingDate = LocalDate.now();
@@ -46,7 +46,7 @@ public class Request implements Serializable {
         super();
     }
 
-    public Request(Integer id, Priority prioridade, Status status, String title, String notes, Technician technician, Client client) {
+    public Request(Long id, Priority prioridade, Status status, String title, String notes, Technician technician, Client client) {
         this.id = id;
         this.prioridade = prioridade;
         this.status = status;
@@ -56,11 +56,11 @@ public class Request implements Serializable {
         this.client = client;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

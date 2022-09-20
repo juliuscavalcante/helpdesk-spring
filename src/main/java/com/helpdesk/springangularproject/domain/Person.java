@@ -22,7 +22,7 @@ public abstract class Person implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Integer id;
+    protected Long id;
 
     protected String name;
 
@@ -48,7 +48,7 @@ public abstract class Person implements Serializable {
         addProfile(Profile.CLIENT);
     }
 
-    public Person(Integer id, String name, String cpf, String email, String password) {
+    public Person(Long id, String name, String cpf, String email, String password) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
@@ -57,11 +57,11 @@ public abstract class Person implements Serializable {
         addProfile(Profile.CLIENT);
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
