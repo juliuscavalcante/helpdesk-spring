@@ -6,6 +6,7 @@ import com.helpdesk.springangularproject.service.exception.ObjectNotFoundExcepti
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,5 +18,9 @@ public class TechnicianService {
     public Technician findById(Long id) {
         Optional<Technician> technicianOptional = technicianRepository.findById(id);
         return technicianOptional.orElseThrow(() -> new ObjectNotFoundException("technician id " + id + " not found"));
+    }
+
+    public List<Technician> findAll() {
+        return technicianRepository.findAll();
     }
 }
