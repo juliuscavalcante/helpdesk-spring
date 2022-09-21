@@ -1,5 +1,6 @@
 package com.helpdesk.springangularproject.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.helpdesk.springangularproject.domain.enums.Profile;
 
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ public class Technician extends Person {
     @Serial
     private static final long serialVersionUID = 7160252738355265561L;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "technician")
     private List<Request> requests = new ArrayList<>();
 
