@@ -1,6 +1,7 @@
 package com.helpdesk.springangularproject.controller;
 
 import com.helpdesk.springangularproject.domain.Technician;
+import com.helpdesk.springangularproject.domain.dto.TechnicianDTO;
 import com.helpdesk.springangularproject.service.TechnicianService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,8 @@ public class TechnicianController {
     private TechnicianService technicianService;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Technician> findById(@PathVariable Long id) {
+    public ResponseEntity<TechnicianDTO> findById(@PathVariable Long id) {
         Technician technician = this.technicianService.findById(id);
-        return ResponseEntity.ok().body(technician);
+        return ResponseEntity.ok().body(new TechnicianDTO(technician));
     }
 }
