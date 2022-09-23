@@ -1,6 +1,7 @@
 package com.helpdesk.springangularproject.service;
 
 import com.helpdesk.springangularproject.domain.Technician;
+import com.helpdesk.springangularproject.domain.dto.TechnicianDTO;
 import com.helpdesk.springangularproject.repository.TechnicianRepository;
 import com.helpdesk.springangularproject.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,11 @@ public class TechnicianService {
 
     public List<Technician> findAll() {
         return technicianRepository.findAll();
+    }
+
+    public Technician create(TechnicianDTO technicianDTO) {
+        technicianDTO.setId(null);
+        Technician technician = new Technician(technicianDTO);
+        return technicianRepository.save(technician);
     }
 }
