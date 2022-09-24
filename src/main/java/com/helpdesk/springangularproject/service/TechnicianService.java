@@ -1,8 +1,11 @@
 package com.helpdesk.springangularproject.service;
 
+import com.helpdesk.springangularproject.domain.Person;
 import com.helpdesk.springangularproject.domain.Technician;
 import com.helpdesk.springangularproject.domain.dto.TechnicianDTO;
+import com.helpdesk.springangularproject.repository.PersonRepository;
 import com.helpdesk.springangularproject.repository.TechnicianRepository;
+import com.helpdesk.springangularproject.service.exception.DataIntegrityViolationException;
 import com.helpdesk.springangularproject.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,9 @@ public class TechnicianService {
     @Autowired
     private TechnicianRepository technicianRepository;
 
+    @Autowired
+    private PersonRepository personRepository;
+
     public Technician findById(Long id) {
         Optional<Technician> technicianOptional = technicianRepository.findById(id);
         return technicianOptional.orElseThrow(() -> new ObjectNotFoundException("technician id " + id + " not found"));
@@ -27,7 +33,20 @@ public class TechnicianService {
 
     public Technician create(TechnicianDTO technicianDTO) {
         technicianDTO.setId(null);
+        validateCpfAndEmail(technicianDTO);
         Technician technician = new Technician(technicianDTO);
         return technicianRepository.save(technician);
+    }
+
+    private void validateCpfAndEmail(TechnicianDTO technicianDTO) {
+        Optional<Person> technicianOptional = personRepository.findByCpf(technicianDTO.getCpf());
+        if (technicianOptional.isPresent() && technicianOptional.get().getId() != technicianDTO.getId()) {
+            throw new DataIntegrityViolationException("This CPF is already registered in our system");
+        }
+
+        technicianOptional = personRepository.findByEmail(technicianDTO.getEmail());
+        if (technicianOptional.isPresent() && technicianOptional.get().getId() != technicianDTO.getId()) {
+            throw new DataIntegrityViolationException("This Email is already registered in our system");
+        }
     }
 }
