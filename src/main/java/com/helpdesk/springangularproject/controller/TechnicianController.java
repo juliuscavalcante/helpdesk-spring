@@ -41,4 +41,10 @@ public class TechnicianController {
               .path("/{id}").buildAndExpand(technician.getId()).toUri();
       return ResponseEntity.created(uri).build();
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<TechnicianDTO> update(@Valid @PathVariable Long id, @RequestBody TechnicianDTO technicianDTO) {
+        Technician technician = technicianService.update(id, technicianDTO);
+        return ResponseEntity.ok().body(new TechnicianDTO(technician));
+    }
 }

@@ -10,6 +10,7 @@ import com.helpdesk.springangularproject.service.exception.ObjectNotFoundExcepti
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +37,14 @@ public class TechnicianService {
         validateCpfAndEmail(technicianDTO);
         Technician technician = new Technician(technicianDTO);
         return technicianRepository.save(technician);
+    }
+
+    public Technician update(Long id, @Valid TechnicianDTO technicianDTO) {
+        technicianDTO.setId(id);
+        Technician technician = findById(id);
+        validateCpfAndEmail(technicianDTO);
+        technician = new Technician(technicianDTO);
+        return personRepository.save(technician);
     }
 
     private void validateCpfAndEmail(TechnicianDTO technicianDTO) {
