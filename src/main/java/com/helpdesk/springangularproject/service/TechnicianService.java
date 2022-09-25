@@ -47,6 +47,14 @@ public class TechnicianService {
         return personRepository.save(technician);
     }
 
+    public void delete(Long id) {
+        Technician technician = findById(id);
+        if(technician.getRequests().size() > 0) {
+            throw new DataIntegrityViolationException("The Technician has one or more Service Orders, and it is not possible to delete him");
+        }
+        technicianRepository.deleteById(id);
+    }
+
     private void validateCpfAndEmail(TechnicianDTO technicianDTO) {
         Optional<Person> technicianOptional = personRepository.findByCpf(technicianDTO.getCpf());
         if (technicianOptional.isPresent() && technicianOptional.get().getId() != technicianDTO.getId()) {
