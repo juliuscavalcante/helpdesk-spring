@@ -39,21 +39,21 @@ public class Request implements Serializable {
     private Technician technician;
 
     @ManyToOne
-    @JoinColumn(name = "client_id")
-    private Client client;
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
     public Request() {
         super();
     }
 
-    public Request(Long id, Priority prioridade, Status status, String title, String notes, Technician technician, Client client) {
+    public Request(Long id, Priority prioridade, Status status, String title, String notes, Technician technician, Customer customer) {
         this.id = id;
         this.prioridade = prioridade;
         this.status = status;
         this.title = title;
         this.notes = notes;
         this.technician = technician;
-        this.client = client;
+        this.customer = customer;
     }
 
     public Long getId() {
@@ -120,12 +120,12 @@ public class Request implements Serializable {
         this.technician = technician;
     }
 
-    public Client getClient() {
-        return client;
+    public Customer getClient() {
+        return customer;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClient(Customer customer) {
+        this.customer = customer;
     }
 
     @Override

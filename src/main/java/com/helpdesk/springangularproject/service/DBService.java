@@ -1,12 +1,12 @@
 package com.helpdesk.springangularproject.service;
 
-import com.helpdesk.springangularproject.domain.Client;
+import com.helpdesk.springangularproject.domain.Customer;
 import com.helpdesk.springangularproject.domain.Request;
 import com.helpdesk.springangularproject.domain.Technician;
 import com.helpdesk.springangularproject.domain.enums.Priority;
 import com.helpdesk.springangularproject.domain.enums.Profile;
 import com.helpdesk.springangularproject.domain.enums.Status;
-import com.helpdesk.springangularproject.repository.ClientRepository;
+import com.helpdesk.springangularproject.repository.CustomerRepository;
 import com.helpdesk.springangularproject.repository.RequestRepository;
 import com.helpdesk.springangularproject.repository.TechnicianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class DBService {
     private TechnicianRepository technicianRepository;
 
     @Autowired
-    private ClientRepository clientRepository;
+    private CustomerRepository customerRepository;
 
     @Autowired
     private RequestRepository requestRepository;
@@ -34,12 +34,12 @@ public class DBService {
         Technician tec5 = new Technician(null, "Linus Torvalds", "778.556.170-27", "linus@mail.com", "123");
         tec1.addProfile(Profile.ADMIN);
 
-        Client cli1 = new Client(null, "Elrond", "316.119.620-13", "elrond@email.com", "123");
-        Client cli2 = new Client(null, "Marie Curie", "322.429.140-06", "curie@mail.com", "123");
-        Client cli3 = new Client(null, "Charles Darwin", "792.043.830-62", "darwin@mail.com", "123");
-        Client cli4 = new Client(null, "Stephen Hawking", "177.409.680-30", "hawking@mail.com", "123");
-        Client cli5 = new Client(null, "Max Planck", "081.399.300-83", "planck@mail.com", "123");
-        cli1.addProfile(Profile.CLIENT);
+        Customer cli1 = new Customer(null, "Elrond", "316.119.620-13", "elrond@email.com", "123");
+        Customer cli2 = new Customer(null, "Marie Curie", "322.429.140-06", "curie@mail.com", "123");
+        Customer cli3 = new Customer(null, "Charles Darwin", "792.043.830-62", "darwin@mail.com", "123");
+        Customer cli4 = new Customer(null, "Stephen Hawking", "177.409.680-30", "hawking@mail.com", "123");
+        Customer cli5 = new Customer(null, "Max Planck", "081.399.300-83", "planck@mail.com", "123");
+        cli1.addProfile(Profile.CUSTOMER);
 
         Request req1 = new Request(null, Priority.MEDIUM, Status.PROGRESS, "Request 01", "Test request", tec1, cli1);
         Request req2 = new Request(null, Priority.HIGH, Status.OPEN, "Chamado 2", "Teste chamado 2", tec1, cli2);
@@ -49,7 +49,7 @@ public class DBService {
 
         technicianRepository.saveAll(Arrays.asList(tec1, tec2, tec3, tec4, tec5));
 
-        clientRepository.saveAll(Arrays.asList(cli1, cli2, cli3, cli4, cli5));
+        customerRepository.saveAll(Arrays.asList(cli1, cli2, cli3, cli4, cli5));
 
         requestRepository.saveAll(Arrays.asList(req1, req2, req3, req4, req5));
     }

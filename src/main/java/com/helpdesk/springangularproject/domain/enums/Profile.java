@@ -4,7 +4,7 @@ package com.helpdesk.springangularproject.domain.enums;
 public enum Profile {
 
     ADMIN(0, "ROLE_ADMIN"),
-    CLIENT(1, "ROLE_CLIENT"),
+    CUSTOMER(1, "ROLE_CLIENT"),
     TECHNICIAN(2, "ROLE_TECHNICIAN");
 
     private Integer code;

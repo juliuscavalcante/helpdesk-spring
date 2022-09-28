@@ -17,7 +17,6 @@ public class TechnicianDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = 972259293075289989L;
 
-
     protected Long id;
     @NotBlank(message = "name is required")
     protected String name;
@@ -43,7 +42,7 @@ public class TechnicianDTO implements Serializable {
 
     public TechnicianDTO() {
         super();
-        addProfile(Profile.CLIENT);
+        addProfile(Profile.CUSTOMER);
     }
 
     public Long getId() {

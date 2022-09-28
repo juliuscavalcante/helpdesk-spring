@@ -45,7 +45,7 @@ public abstract class Person implements Serializable {
 
     public Person() {
         super();
-        addProfile(Profile.CLIENT);
+        addProfile(Profile.CUSTOMER);
     }
 
     public Person(Long id, String name, String cpf, String email, String password) {
@@ -54,7 +54,7 @@ public abstract class Person implements Serializable {
         this.cpf = cpf;
         this.email = email;
         this.password = password;
-        addProfile(Profile.CLIENT);
+        addProfile(Profile.CUSTOMER);
     }
 
     public Long getId() {
