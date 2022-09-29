@@ -3,6 +3,7 @@ package com.helpdesk.springangularproject.domain.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.helpdesk.springangularproject.domain.Request;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -13,17 +14,33 @@ public class RequestDTO implements Serializable {
     private static final long serialVersionUID = 7663703502420151568L;
 
     private Long id;
+
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate openingDate = LocalDate.now();
+
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate closingDate;
+
+    @NotNull(message = "priority is required")
     private Integer priority;
+
+    @NotNull(message = "status is required")
     private Integer status;
+
+    @NotNull(message = "title is required")
     private String title;
+
+    @NotNull(message = "notes is required")
     private String notes;
+
+    @NotNull(message = "technician is required")
     private Long technician;
+
+    @NotNull(message = "customer is required")
     private Long customer;
+
     private String technicianName;
+
     private String customerName;
 
     public RequestDTO() {
@@ -31,7 +48,6 @@ public class RequestDTO implements Serializable {
     }
 
     public RequestDTO(Request request) {
-        super();
         this.id = request.getId();
         this.openingDate = request.getOpeningDate();
         this.closingDate = request.getClosingDate();
