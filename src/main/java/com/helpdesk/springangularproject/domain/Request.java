@@ -26,7 +26,7 @@ public class Request implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate closingDate;
 
-    private Priority prioridade;
+    private Priority priority;
 
     private Status status;
 
@@ -46,9 +46,9 @@ public class Request implements Serializable {
         super();
     }
 
-    public Request(Long id, Priority prioridade, Status status, String title, String notes, Technician technician, Customer customer) {
+    public Request(Long id, Priority priority, Status status, String title, String notes, Technician technician, Customer customer) {
         this.id = id;
-        this.prioridade = prioridade;
+        this.priority = priority;
         this.status = status;
         this.title = title;
         this.notes = notes;
@@ -80,12 +80,12 @@ public class Request implements Serializable {
         this.closingDate = closingDate;
     }
 
-    public Priority getPrioridade() {
-        return prioridade;
+    public Priority getPriority() {
+        return priority;
     }
 
-    public void setPrioridade(Priority prioridade) {
-        this.prioridade = prioridade;
+    public void setPriority(Priority prioridade) {
+        this.priority = prioridade;
     }
 
     public Status getStatus() {
@@ -120,11 +120,11 @@ public class Request implements Serializable {
         this.technician = technician;
     }
 
-    public Customer getClient() {
+    public Customer getCustomer() {
         return customer;
     }
 
-    public void setClient(Customer customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
