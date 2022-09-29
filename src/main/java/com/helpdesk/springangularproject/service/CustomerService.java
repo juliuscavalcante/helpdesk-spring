@@ -25,7 +25,7 @@ public class CustomerService {
 
     public Customer findById(Long id) {
         Optional<Customer> customerOptional = customerRepository.findById(id);
-        return customerOptional.orElseThrow(() -> new ObjectNotFoundException("Client id " + id + " not found"));
+        return customerOptional.orElseThrow(() -> new ObjectNotFoundException("Customer id " + id + " not found"));
     }
 
     public List<Customer> findAll() {
