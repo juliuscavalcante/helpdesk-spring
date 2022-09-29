@@ -5,11 +5,11 @@ import com.helpdesk.springangularproject.domain.dto.RequestDTO;
 import com.helpdesk.springangularproject.service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,5 +32,13 @@ public class RequestController {
         List<RequestDTO> requestDTOList = requestList.stream()
                 .map(request -> new RequestDTO(request)).collect(Collectors.toList());
         return ResponseEntity.ok().body(requestDTOList);
+    }
+
+    @PostMapping
+    public ResponseEntity<RequestDTO> create(@Valid @RequestBody RequestDTO requestDTO) {
+        Request request = requestService.create(requestDTO);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
+                .path("/{id}").buildAndExpand(request.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 }
