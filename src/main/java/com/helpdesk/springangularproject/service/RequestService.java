@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +41,14 @@ public class RequestService {
         return requestRepository.save(newRequest(requestDTO));
     }
 
+    public Request update(Long id, @Valid RequestDTO requestDTO) {
+        requestDTO.setId(id);
+        Request request = findById(id);
+        request = newRequest(requestDTO);
+        return requestRepository.save(request);
+
+    }
+
     private Request newRequest(RequestDTO requestDTO) {
         Technician technician = technicianService.findById(requestDTO.getTechnician());
         Customer customer = customerService.findById(requestDTO.getCustomer());
@@ -49,12 +58,18 @@ public class RequestService {
             request.setId(requestDTO.getId());
         }
 
+        if (requestDTO.getStatus().equals(2)) {
+            request.setClosingDate(LocalDate.now());
+        }
+
         request.setTechnician(technician);
         request.setCustomer(customer);
         request.setPriority(Priority.toEnum(requestDTO.getPriority()));
         request.setStatus(Status.toEnum(requestDTO.getStatus()));
-        request.setTitle(requestDTO.getNotes());
+        request.setTitle(requestDTO.getTitle());
         request.setNotes(requestDTO.getNotes());
         return request;
     }
+
+
 }
