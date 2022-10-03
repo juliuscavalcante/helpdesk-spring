@@ -8,6 +8,7 @@ import com.helpdesk.springangularproject.repository.TechnicianRepository;
 import com.helpdesk.springangularproject.service.exception.DataIntegrityViolationException;
 import com.helpdesk.springangularproject.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -23,6 +24,9 @@ public class TechnicianService {
     @Autowired
     private PersonRepository personRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder encoder;
+
     public Technician findById(Long id) {
         Optional<Technician> technicianOptional = technicianRepository.findById(id);
         return technicianOptional.orElseThrow(() -> new ObjectNotFoundException("technician id " + id + " not found"));
@@ -34,6 +38,7 @@ public class TechnicianService {
 
     public Technician create(TechnicianDTO technicianDTO) {
         technicianDTO.setId(null);
+        technicianDTO.setPassword(encoder.encode(technicianDTO.getPassword()));
         validateCpfAndEmail(technicianDTO);
         Technician technician = new Technician(technicianDTO);
         return technicianRepository.save(technician);

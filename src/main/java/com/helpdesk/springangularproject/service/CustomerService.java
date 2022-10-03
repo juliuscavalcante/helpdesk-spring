@@ -8,6 +8,7 @@ import com.helpdesk.springangularproject.repository.PersonRepository;
 import com.helpdesk.springangularproject.service.exception.DataIntegrityViolationException;
 import com.helpdesk.springangularproject.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -23,6 +24,9 @@ public class CustomerService {
     @Autowired
     private PersonRepository personRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder encoder;
+
     public Customer findById(Long id) {
         Optional<Customer> customerOptional = customerRepository.findById(id);
         return customerOptional.orElseThrow(() -> new ObjectNotFoundException("Customer id " + id + " not found"));
@@ -34,6 +38,7 @@ public class CustomerService {
 
     public Customer create(CustomerDTO customerDTO) {
         customerDTO.setId(null);
+        customerDTO.setPassword(encoder.encode(customerDTO.getPassword()));
         validateCpfAndEmail(customerDTO);
         Customer customer = new Customer(customerDTO);
         return customerRepository.save(customer);
