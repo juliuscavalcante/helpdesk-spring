@@ -31,7 +31,7 @@ public class DBService {
     private BCryptPasswordEncoder encoder;
 
     public void instantiateDB() {
-        Technician tec1 = new Technician(null, "Galandriel", "806.096.260-43", "galandriel@email.com", encoder.encode("123"));
+        Technician tec1 = new Technician(null, "Julius", "806.096.260-43", "julius@email.com", encoder.encode("123"));
         Technician tec2 = new Technician(null, "Richard Stallman", "903.347.070-56", "stallman@mail.com", encoder.encode("123"));
         Technician tec3 = new Technician(null, "Claude Elwood Shannon", "271.068.470-54", "shannon@mail.com", encoder.encode("123"));
         Technician tec4 = new Technician(null, "Tim Berners-Lee", "162.720.120-39", "lee@mail.com", encoder.encode("123"));
