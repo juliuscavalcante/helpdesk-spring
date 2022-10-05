@@ -5,6 +5,7 @@ import com.helpdesk.springangularproject.domain.dto.TechnicianDTO;
 import com.helpdesk.springangularproject.service.TechnicianService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -34,6 +35,7 @@ public class TechnicianController {
         return ResponseEntity.ok().body(new TechnicianDTO(technician));
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
     public ResponseEntity<TechnicianDTO> create(@Valid @RequestBody TechnicianDTO technicianDTO) {
       Technician technician = technicianService.create(technicianDTO);
@@ -42,12 +44,14 @@ public class TechnicianController {
       return ResponseEntity.created(uri).build();
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<TechnicianDTO> update(@Valid @PathVariable Long id, @RequestBody TechnicianDTO technicianDTO) {
         Technician technician = technicianService.update(id, technicianDTO);
         return ResponseEntity.ok().body(new TechnicianDTO(technician));
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<TechnicianDTO> delete(@PathVariable Long id) {
         technicianService.delete(id);
