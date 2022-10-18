@@ -46,10 +46,14 @@ public class TechnicianService {
 
     public Technician update(Long id, @Valid TechnicianDTO technicianDTO) {
         technicianDTO.setId(id);
-        Technician technician = findById(id);
+        Technician oldTechnician = findById(id);
+
+        if (!technicianDTO.getPassword().equals(oldTechnician.getPassword()))
+            technicianDTO.setPassword(encoder.encode(technicianDTO.getPassword()));
+
         validateCpfAndEmail(technicianDTO);
-        technician = new Technician(technicianDTO);
-        return personRepository.save(technician);
+        oldTechnician = new Technician(technicianDTO);
+        return personRepository.save(oldTechnician);
     }
 
     public void delete(Long id) {

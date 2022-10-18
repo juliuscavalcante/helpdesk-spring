@@ -46,10 +46,14 @@ public class CustomerService {
 
     public Customer update(Long id, @Valid CustomerDTO customerDTO) {
         customerDTO.setId(id);
-        Customer customer = findById(id);
+        Customer oldCustomer = findById(id);
+
+        if (!customerDTO.getPassword().equals(oldCustomer.getPassword()))
+            customerDTO.setPassword(encoder.encode(customerDTO.getPassword()));
+
         validateCpfAndEmail(customerDTO);
-        customer = new Customer(customerDTO);
-        return personRepository.save(customer);
+        oldCustomer = new Customer(customerDTO);
+        return personRepository.save(oldCustomer);
     }
 
     public void delete(Long id) {
