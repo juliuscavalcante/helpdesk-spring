@@ -53,7 +53,7 @@ public class TechnicianService {
 
         validateCpfAndEmail(technicianDTO);
         oldTechnician = new Technician(technicianDTO);
-        return personRepository.save(oldTechnician);
+        return technicianRepository.save(oldTechnician);
     }
 
     public void delete(Long id) {

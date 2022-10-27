@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.helpdesk.springangularproject.domain.dto.CustomerDTO;
 import com.helpdesk.springangularproject.domain.enums.Profile;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +29,8 @@ public class Customer extends Person {
         super(id, name, cpf, email, password);
         addProfile(Profile.CUSTOMER);
     }
+
+
 
     public Customer(CustomerDTO customerDTO) {
         this.id = customerDTO.getId();

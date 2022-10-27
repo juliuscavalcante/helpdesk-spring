@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.helpdesk.springangularproject.domain.dto.TechnicianDTO;
 import com.helpdesk.springangularproject.domain.enums.Profile;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
